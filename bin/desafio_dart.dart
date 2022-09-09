@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:desafio_dart/company.dart';
 
 void main() {
-  bool exitMenu = true;
+  final companys = <Company>[];
+  bool exitMenu = false;
 
   do {
     print('''
-        CADASTRO 
+           ****   MENU   ****  
         (1) Cadastrar nova Empresa
         (2) Buscar Empresa por CNPJ
         (3) Buscar Empresa por Sócio
@@ -18,7 +20,8 @@ void main() {
     switch (inputMenu) {
       case '1':
         {
-          print('Cadastrar nova Empresa');
+          //addCompany(companys);
+          print(companys);
           break;
         }
       case '2':
@@ -46,5 +49,10 @@ void main() {
           (inputMenu == '6') ? exitMenu = false : print('Opção inválida.');
         }
     }
-  } while (exitMenu);
+  } while (!exitMenu);
+
+  void addCompany(List listCompanys) {
+    Company company = Company();
+    listCompanys.add(company);
+  }
 }

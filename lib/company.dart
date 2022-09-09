@@ -1,26 +1,27 @@
-import 'package:desafio_dart/endereco.dart';
-import 'package:desafio_dart/socio.dart';
+import 'package:desafio_dart/address.dart';
+import 'package:desafio_dart/partner.dart';
 import 'package:desafio_dart/id.dart';
 
-class Empresa {
+class Company {
   late Id id;
-  late DateTime horarioCadastro;/*
+  late DateTime registrationTime;/*
   String razaoSocial;
   String nomeFantasia;
   String cnpj;
-  Endereco endereco;
+  Address address;
   String telefone;
   Socio socio;*/
 
-  Empresa(/*{
+  Company(/*{
     required this.razaoSocial,
     required this.nomeFantasia,
     required this.cnpj,
     required this.endereco,
     required this.telefone,
     required this.socio,
-  }*/){
-    horarioCadastro = DateTime.now();
+  }*/
+      ) {
+    registrationTime = DateTime.now();
     id = Id();
   }
 }
