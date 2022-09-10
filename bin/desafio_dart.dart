@@ -3,8 +3,16 @@ import 'dart:io';
 import 'package:desafio_dart/company.dart';
 
 void main() {
-  final companys = <Company>[];
   bool exitMenu = false;
+  final listCompanys = <Company>[];
+
+  void addCompany(List listCompanys) {
+    print('razaoSocial:');
+    String razaoSocial = stdin.readLineSync(encoding: utf8)!;
+    Company company = Company(razaoSocial: razaoSocial);
+
+    listCompanys.add(company);
+  }
 
   do {
     print('''
@@ -20,8 +28,10 @@ void main() {
     switch (inputMenu) {
       case '1':
         {
-          //addCompany(companys);
-          print(companys);
+          addCompany(listCompanys);
+          listCompanys.forEach((element) {
+            print('Razaõ Social: ${element.razaoSocial}');
+          });
           break;
         }
       case '2':
@@ -46,13 +56,8 @@ void main() {
         }
       default:
         {
-          (inputMenu == '6') ? exitMenu = false : print('Opção inválida.');
+          (inputMenu == '6') ? exitMenu = true : print('Opção inválida.');
         }
     }
   } while (!exitMenu);
-
-  void addCompany(List listCompanys) {
-    Company company = Company();
-    listCompanys.add(company);
-  }
 }
