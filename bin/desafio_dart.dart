@@ -14,6 +14,14 @@ void main() {
     listCompanys.add(company);
   }
 
+  void showList(List listCompany) {
+    listCompanys.forEach((element) {
+      print('ID: ${element.id}');
+      print('Data de Registro: ${element.registrationTime}');
+      print('Razaõ Social: ${element.razaoSocial}\n');
+    });
+  }
+
   do {
     print('''
            ****   MENU   ****  
@@ -29,9 +37,7 @@ void main() {
       case '1':
         {
           addCompany(listCompanys);
-          listCompanys.forEach((element) {
-            print('Razaõ Social: ${element.razaoSocial}');
-          });
+
           break;
         }
       case '2':
@@ -46,7 +52,8 @@ void main() {
         }
       case '4':
         {
-          print('Listar Empresas');
+          listCompanys.sort((a, b) => a.razaoSocial.compareTo(b.razaoSocial));
+          showList(listCompanys);
           break;
         }
       case '5':
