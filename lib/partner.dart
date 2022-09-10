@@ -1,13 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:desafio_dart/address.dart';
 
 class Partner {
-  String name;
-  String cpf;
-  Address address;
+  late String name;
+  late String cpf;
+  late Address address;
 
-  Partner({
-    required this.name,
-    required this.cpf,
-    required this.address,
-  });
+  Partner() {
+    name = stdin.readLineSync(encoding: utf8)!;
+    cpf = stdin.readLineSync(encoding: utf8)!;
+    print('Endereço Sócio...');
+    address = Address();
+  }
 }

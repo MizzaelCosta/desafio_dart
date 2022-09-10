@@ -1,24 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:desafio_dart/address.dart';
 import 'package:desafio_dart/company.dart';
+import 'package:desafio_dart/partner.dart';
 
 void main() {
   bool exitMenu = false;
   final listCompanys = <Company>[];
 
-  void addCompany(List listCompanys) {
-    print('razaoSocial:');
-    String razaoSocial = stdin.readLineSync(encoding: utf8)!;
-    Company company = Company(razaoSocial: razaoSocial);
-
-    listCompanys.add(company);
-  }
-
   void showList(List listCompany) {
+    // ignore: avoid_function_literals_in_foreach_calls
     listCompanys.forEach((element) {
-      print('ID: ${element.id}');
-      print('Data de Registro: ${element.registrationTime}');
-      print('Razaõ Social: ${element.razaoSocial}\n');
+      print('''
+ID: ${element.id}'
+CNPJ: ${element.cnpj} Data Cadastro: ${element.registrationTime}
+Nome Fantasia: ${element.nomeFantasia}
+Telefone: ${element.telefone}
+Endereço: ${element.address.street}, ${element.address.number}, ${element.address.complemento}, ${element.address.state}, ${element.address.postalCode}
+Sócio:
+CPF: ${element.partner.cpf}
+Nome Completo: ${element.partner.name}
+Endereço: ${element.partner.address.street}, ${element.partner.address.number}, ${element.partner.address.complemento}, ${element.partner.address.state}, ${element.partner.address.postalCode}
+''');
     });
   }
 
@@ -36,8 +39,9 @@ void main() {
     switch (inputMenu) {
       case '1':
         {
-          addCompany(listCompanys);
-
+          // ignore: unused_local_variable
+          Company company = Company();
+          listCompanys.add(company);
           break;
         }
       case '2':
