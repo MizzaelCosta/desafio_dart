@@ -9,12 +9,12 @@ class Partner {
   late Address address;
 
   Partner() {
-    print('Digite Nome Completo:');
+    stdout.write('Digite Nome Completo: ');
     name = stdin.readLineSync(encoding: utf8)!;
-    print('Digite CPF (Apenas NUmeros):');
-    String input;
-    cpf = CPFValidator.format(input = stdin.readLineSync(encoding: utf8)!);
-    print('Endereço Sócio...');
+    stdout.write('Digite CPF (Apenas Números): ');
+    String input = stdin.readLineSync(encoding: utf8)!;
+    cpf = CPFValidator.format(input);
+    print('Endereço...');
     address = Address();
   }
 }

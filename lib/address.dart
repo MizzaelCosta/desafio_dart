@@ -9,15 +9,15 @@ class Address {
   late String postalCode;
 
   Address() {
-    print('Digite Rua:');
+    stdout.write('Digite Rua: ');
     street = stdin.readLineSync(encoding: utf8)!;
-    print('Digite Número:');
+    stdout.write('Digite Número: ');
     number = stdin.readLineSync(encoding: utf8)!;
-    print('Digite Complmento:');
+    stdout.write('Digite Complmento: ');
     complemento = stdin.readLineSync(encoding: utf8)!;
-    print('Digite Estado:');
+    stdout.write('Digite Estado: ');
     state = stdin.readLineSync(encoding: utf8)!;
-    print('Digite Cep:');
+    stdout.write('Digite Cep: ');
     postalCode = stdin.readLineSync(encoding: utf8)!;
   }
 }
