@@ -35,6 +35,7 @@ Deseja adicionar uma Empresa?
 (2) Não
 Sua escolha: ''');
     String input = stdin.readLineSync(encoding: utf8)!;
+    print('');
     if (input == '1') {
       addCompany();
     }
@@ -92,6 +93,7 @@ Sua escolha: ''');
       showListCompanys(listCompanys);
       stdout.write('Digite o Id da Empresa que deseja excluir: ');
       String id = stdin.readLineSync(encoding: utf8)!;
+      print('');
       for (var i = 0; i < listCompanys.length; i++) {
         if (listCompanys[i].id == id) {
           showCompany(listCompanys[i]);
@@ -101,6 +103,7 @@ Deseja realmente excluir esta Empresa?
 (2) Não
 Sua escolha: ''');
           String input = stdin.readLineSync(encoding: utf8)!;
+          print('');
           if (input == '1') {
             listCompanys.removeAt(i);
           }
@@ -126,8 +129,8 @@ Sua escolha: ''');
   (6) Sair
 
 Digite a opção desejada: ''');
-    print('');
     String inputMenu = stdin.readLineSync(encoding: utf8)!;
+    print('');
     switch (inputMenu) {
       case '1':
         {

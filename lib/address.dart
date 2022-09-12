@@ -20,4 +20,6 @@ class Address {
     stdout.write('Digite Cep: ');
     postalCode = stdin.readLineSync(encoding: utf8)!;
   }
+
+  
 }

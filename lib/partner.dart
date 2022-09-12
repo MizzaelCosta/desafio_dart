@@ -10,11 +10,32 @@ class Partner {
 
   Partner() {
     stdout.write('Digite Nome Completo: ');
-    name = stdin.readLineSync(encoding: utf8)!;
+    name = nameValidator();
     stdout.write('Digite CPF (Apenas Números): ');
-    String input = stdin.readLineSync(encoding: utf8)!;
-    cpf = CPFValidator.format(input);
+    cpf = cpfValidator();
     print('Endereço...');
     address = Address();
+  }
+
+  String cpfValidator() {
+    String input = stdin.readLineSync(encoding: utf8)!;
+    while (!(CPFValidator.isValid(input))) {
+      //CPF válido 35999906032
+      stdout.write('CPF inválido! Digite um CPF que seja válido:');
+      input = stdin.readLineSync(encoding: utf8)!;
+    }
+    String value = CPFValidator.format(input);
+    return value;
+  }
+
+  String nameValidator() {
+    String input = stdin.readLineSync(encoding: utf8)!;
+    List fullName = input.split(" ");
+    while (fullName.length < 2) {
+      stdout.write('Digite o Nome completo:');
+      input = stdin.readLineSync(encoding: utf8)!;
+      fullName = input.split(" ");
+    }
+    return input;
   }
 }
