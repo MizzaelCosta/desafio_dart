@@ -20,6 +20,7 @@ class Address {
       stdout.write('CEP invalido! Digite um CEP com 8 caracteres: ');
       zipCode = stdin.readLineSync(encoding: utf8)!;
     }
-    zipCode = '${zipCode.substring(0, 5)}-${zipCode.substring(5, 8)}';
+    zipCode =
+        '${zipCode.substring(0, 2)}.${zipCode.substring(2, 5)}-${zipCode.substring(5, 8)}';
   }
 }

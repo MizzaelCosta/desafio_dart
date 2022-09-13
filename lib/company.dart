@@ -39,6 +39,6 @@ class Company {
       telefone = stdin.readLineSync(encoding: utf8)!;
     }
     telefone =
-        '${telefone.substring(0, 2)} ${telefone.substring(3, 7)}-${telefone.substring(8, 11)}';
+        '(${telefone.substring(0, 2)}) ${telefone.substring(2, 3)} ${telefone.substring(3, 7)}-${telefone.substring(7, 11)}';
   }
 }
