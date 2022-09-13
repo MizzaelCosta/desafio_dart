@@ -1,44 +1,44 @@
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 import 'package:desafio_dart/address.dart';
 import 'package:desafio_dart/partner.dart';
-import 'dart:convert';
-import 'dart:io';
 import 'package:uuid/uuid.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class Company {
-  final id = '1'; //Uuid().v1;
-  final DateTime registrationTime = DateTime.now();
-  late String razaoSocial;
-  late String nomeFantasia;
-  late String cnpj;
-  late String telefone;
-  late Address address;
-  late Partner partner;
+  final String _id = Uuid().v1();
+  final DateTime _registerDate = DateTime.now();
+  String corporateName;
+  String fantasyName;
+  String _cnpj;
+  String telefone;
+  Address address;
+  Partner partner;
 
-  Company() {
-    print('Empresa...');
-    stdout.write('Digite Razao Social: ');
-    razaoSocial = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite Nome Fantasia: ');
-    nomeFantasia = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite CNPJ (Apenas Números): ');
-    cnpj = cnpjValidator();
-    stdout.write('Digite Telefone: ');
-    telefone = stdin.readLineSync(encoding: utf8)!;
-    print('Endereço...');
-    address = Address();
-    print('\nSócio...');
-    partner = Partner();
-  }
+  DateTime get registerDate => _registerDate;
+  dynamic get id => _id;
+  String get cnpj => _cnpj;
 
-  String cnpjValidator() {
-    String input = stdin.readLineSync(encoding: utf8)!;
-    while (!(CNPJValidator.isValid(input))) {
-      //CNPJ válido 17942159000128
-      stdout.write('CNPJ inválido! Digite um CNPJ que seja válido:');
-      input = stdin.readLineSync(encoding: utf8)!;
+  Company(
+    this._cnpj, {
+    required this.corporateName,
+    required this.fantasyName,
+    required this.telefone,
+    required this.address,
+    required this.partner,
+  }) {
+    while (!(CNPJValidator.isValid(_cnpj))) {
+      //Exemplo de CNPJ válido 17942159000128
+      stdout.write('CNPJ inválido! Digite um CNPJ que seja válido: ');
+      _cnpj = stdin.readLineSync(encoding: utf8)!;
     }
-    String value = CNPJValidator.format(input);
-    return value;
+    _cnpj = CNPJValidator.format(_cnpj);
+    while (telefone.length != 11) {
+      //Exemplo de CEP válido 26157579
+      stdout.write('Número invalido! Digite um Número com 11 caracteres: ');
+      telefone = stdin.readLineSync(encoding: utf8)!;
+    }
+    telefone =
+        '${telefone.substring(0, 2)} ${telefone.substring(3, 7)}-${telefone.substring(8, 11)}';
   }
 }

@@ -2,24 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 
 class Address {
-  late String street;
-  late String number;
-  late String? complemento;
-  late String state;
-  late String postalCode;
+  String street;
+  String number;
+  String? complement;
+  String state;
+  String zipCode;
 
-  Address() {
-    stdout.write('Digite Rua: ');
-    street = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite Número: ');
-    number = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite Complmento: ');
-    complemento = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite Estado: ');
-    state = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('Digite Cep: ');
-    postalCode = stdin.readLineSync(encoding: utf8)!;
+  Address({
+    required this.street,
+    required this.number,
+    this.complement,
+    required this.state,
+    required this.zipCode,
+  }) {
+    while (zipCode.length != 8) {
+      //Exemplo de CEP válido 26157579
+      stdout.write('CEP invalido! Digite um CEP com 8 caracteres: ');
+      zipCode = stdin.readLineSync(encoding: utf8)!;
+    }
+    zipCode = '${zipCode.substring(0, 5)}-${zipCode.substring(5, 8)}';
   }
-
-  
 }

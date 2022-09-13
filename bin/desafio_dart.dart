@@ -2,28 +2,54 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
+import 'package:desafio_dart/address.dart';
 import 'package:desafio_dart/company.dart';
+import 'package:desafio_dart/partner.dart';
 
 void main() {
-  bool exitMenu = false;
   final listCompanys = <Company>[];
 
   void addCompany() {
-    Company company = Company();
+    Partner partner = Partner(
+      name: 'Nome',
+      '35999906032',
+      address: Address(
+        street: 'Rua',
+        number: 'Número',
+        complement: '',
+        zipCode: '23456789',
+        state: 'UF',
+      ),
+    );
+    Company company = Company(
+      '17942159000128',
+      corporateName: 'Razao Social',
+      fantasyName: 'Nome Fantasia',
+      telefone: '21987654321',
+      address: Address(
+        street: 'Rua',
+        number: 'number',
+        complement: '',
+        zipCode: '23456789',
+        state: 'UF',
+      ),
+      partner: partner,
+    );
     listCompanys.add(company);
   }
 
   void showCompany(Company company) {
     print('''
 ID: ${company.id}
-CNPJ: ${company.cnpj} Data Cadastro: ${company.registrationTime}
-Nome Fantasia: ${company.nomeFantasia}
+CNPJ: ${company.cnpj} Data de Cadastro: ${company.registerDate}
+Razão Social: ${company.corporateName}
+Nome Fantasia: ${company.fantasyName}
 Telefone: ${company.telefone}
-Endereço: ${company.address.street}, ${company.address.number}, ${company.address.complemento}, ${company.address.state}, ${company.address.postalCode}
+Endereço: ${company.address.street}, ${company.address.number}, ${company.address.complement}, ${company.address.state}, ${company.address.zipCode}
 Sócio:
 CPF: ${company.partner.cpf}
 Nome Completo: ${company.partner.name}
-Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.complemento}, ${company.partner.address.state}, ${company.partner.address.postalCode}
+Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.complement}, ${company.partner.address.state}, ${company.partner.address.zipCode}
 ''');
   }
 
@@ -43,7 +69,7 @@ Sua escolha: ''');
 
   void showListCompanys(List listCompanys) {
     if (listCompanys.isNotEmpty) {
-      listCompanys.sort((a, b) => a.razaoSocial.compareTo(b.razaoSocial));
+      listCompanys.sort((a, b) => a.corporateName.compareTo(b.corporateName));
       for (var i = 0; i < listCompanys.length; i++) {
         showCompany(listCompanys[i]);
       }
@@ -57,7 +83,7 @@ Sua escolha: ''');
       stdout.write('Digite o CNPJ da Empresa: ');
       String input = stdin.readLineSync(encoding: utf8)!;
       print('');
-      String cnpj = CNPJValidator.format(input);
+      String cnpj = input = CNPJValidator.format(input);
       for (var i = 0; i < listCompanys.length; i++) {
         if (listCompanys[i].cnpj == cnpj) {
           showCompany(listCompanys[i]);
@@ -65,7 +91,6 @@ Sua escolha: ''');
         }
       }
       print('Empresa não encontrada.');
-      return;
     }
     mensageListEmpty();
   }
@@ -75,7 +100,7 @@ Sua escolha: ''');
       stdout.write('Digite o CPF do Sócio: ');
       String input = stdin.readLineSync(encoding: utf8)!;
       print('');
-      String cpf = CPFValidator.format(input);
+      String cpf = input = CPFValidator.format(input);
       for (var i = 0; i < listCompanys.length; i++) {
         if (listCompanys[i].partner.cpf == cpf) {
           showCompany(listCompanys[i]);
@@ -83,7 +108,6 @@ Sua escolha: ''');
         }
       }
       print('Empresa não encontrada.');
-      return;
     }
     mensageListEmpty();
   }
@@ -116,6 +140,7 @@ Sua escolha: ''');
     mensageListEmpty();
   }
 
+  bool exitMenu = false;
   do {
     stdout.write('''
 
