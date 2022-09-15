@@ -39,7 +39,7 @@ class Company {
       telefone = stdin.readLineSync(encoding: utf8)!;
     }
     address = Address.addAddress();
-    print('''\n
+    stdout.write('''\n
 Qual tipo de Sócio da Empresa?
 (1) PF (Pessoa Física)
 (2) PJ (Pessoa Jurídica)
