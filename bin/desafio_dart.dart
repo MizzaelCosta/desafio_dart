@@ -63,7 +63,7 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
       print('');
       for (var i = 0; i < listCompanys.length; i++) {
         if (listCompanys[i].registerNumber == input ||
-            listCompanys[i].Partner.registerNumber) {
+            listCompanys[i].partner.registerNumber == input) {
           showCompany(listCompanys[i]);
           return;
         }
