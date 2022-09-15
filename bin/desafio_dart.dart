@@ -33,16 +33,27 @@ Sua escolha: ''');
   void showCompany(Company company) {
     print('''
 ID: ${company.id}
-CNPJ: ${CNPJValidator.format(company.cnpj)} Data de Cadastro: ${company.registerDate}
-Razão Social: ${company.corporateName}
+CNPJ: ${CNPJValidator.format(company.registerNumber)} Data de Cadastro: ${company.registerDate}
+Razão Social: ${company.registerName}
 Nome Fantasia: ${company.fantasyName}
 Telefone: (${company.telefone.substring(0, 2)}) ${company.telefone.substring(2, 6)}-${company.telefone.substring(6, 10)}
-Endereço: ${company.address.street}, ${company.address.number}, ${company.address.district}, ${company.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
+Endereço: ${company.address.street}, ${company.address.number}, ${company.address.district}, ${company.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}''');
+    if (CPFValidator.isValid(company.partner.registerNumber)) {
+      print('''
 Sócio:
-CPF: ${CPFValidator.format(company.partner.cpf)}
-Nome Completo: ${company.partner.name}
+CPF: ${CPFValidator.format(company.partner.registerNumber)}
+Nome Completo: ${company.partner.registerName}
 Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.district}, ${company.partner.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
 ''');
+    } else {
+      print('''
+Sócio:
+CNPJ: ${CNPJValidator.format(company.partner.registerNumber)}
+Razão Social: ${company.registerName}
+Nome Fantasia: ${company.partner.registerName}
+Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.district}, ${company.partner.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
+''');
+    }
   }
 
   void searchCompany(List listCompanys, String value) {
@@ -51,13 +62,13 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
       String input = stdin.readLineSync(encoding: utf8)!;
       print('');
       for (var i = 0; i < listCompanys.length; i++) {
-        if (listCompanys[i].cnpj == input ||
-            listCompanys[i].partner.cpf == input) {
+        if (listCompanys[i].registerNumber == input ||
+            listCompanys[i].Partner.registerNumber) {
           showCompany(listCompanys[i]);
           return;
         }
       }
-      
+
       print('Empresa não encontrada.');
       return;
     }
@@ -66,7 +77,7 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
 
   void showListCompanys(List listCompanys) {
     if (listCompanys.isNotEmpty) {
-      listCompanys.sort((a, b) => a.corporateName.compareTo(b.corporateName));
+      listCompanys.sort((a, b) => a.registerName.compareTo(b.registerName));
       for (var i = 0; i < listCompanys.length; i++) {
         showCompany(listCompanys[i]);
       }
@@ -87,7 +98,6 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
           stdout.write('''
 Deseja realmente excluir esta Empresa?
 (1) Sim
-(2) Não
 Sua escolha: ''');
           String input = stdin.readLineSync(encoding: utf8)!;
           print('');
@@ -132,7 +142,7 @@ Digite a opção desejada: ''');
         }
       case '3':
         {
-          searchCompany(listCompanys, 'CPF do Sócio: ');
+          searchCompany(listCompanys, 'CPF ou CNPJ do Sócio: ');
           break;
         }
       case '4':

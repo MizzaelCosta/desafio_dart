@@ -1,26 +1,18 @@
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
+// ignore_for_file: recursive_getters
+
+import 'package:desafio_dart/partner_pf.dart';
 import 'package:desafio_dart/address.dart';
-import 'dart:convert';
-import 'dart:io';
+import 'package:desafio_dart/partner_pj.dart';
 
-class Partner {
-  late String name;
-  late String _cpf;
-  late Address address;
-
-  String get cpf => _cpf;
-
-  Partner.addPartner() {
-    print('\nSócio...');
-    stdout.write('Nome Completo: ');
-    name = stdin.readLineSync(encoding: utf8)!;
-    stdout.write('CPF (Apenas números): ');
-    _cpf = stdin.readLineSync(encoding: utf8)!;
-    while (!(CPFValidator.isValid(_cpf))) {
-      //Exemplo de CPF válido 35999906032
-      stdout.write('CPF inválido! Digite um CPF que seja válido: ');
-      _cpf = stdin.readLineSync(encoding: utf8)!;
+abstract class Partner {
+  factory Partner.addPartner(String value) {
+    if (value == '1') {
+      return PartnerPF.addPartner();
+    } else {
+      return PartnerPJ.addPartner();
     }
-    address = Address.addAddress();
   }
+  Address get address => address;
+  String get registerName => registerName;
+  String get registerNumber => registerNumber;
 }

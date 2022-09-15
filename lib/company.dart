@@ -8,27 +8,28 @@ import 'dart:convert';
 class Company {
   late final String _id = Uuid().v1();
   late final DateTime _registerDate = DateTime.now();
-  late String corporateName;
+  late String registerName;
   late String fantasyName;
-  late String _cnpj;
+  late String _registerNumber;
   late String telefone;
   late Address address;
-  late Partner partner;
+  late Partner _partner;
 
   DateTime get registerDate => _registerDate;
   dynamic get id => _id;
-  String get cnpj => _cnpj;
+  String get registerNumber => _registerNumber;
+  Partner get partner => _partner;
 
   Company.addCompany() {
     stdout.write('CNPJ (Apenas número): ');
-    _cnpj = stdin.readLineSync(encoding: utf8)!;
-    while (!(CNPJValidator.isValid(cnpj))) {
+    _registerNumber = stdin.readLineSync(encoding: utf8)!;
+    while (!(CNPJValidator.isValid(_registerNumber))) {
       //Exemplo de CNPJ válido 17942159000128
       stdout.write('CNPJ inválido! Digite um CNPJ que seja válido: ');
-      _cnpj = stdin.readLineSync(encoding: utf8)!;
+      _registerNumber = stdin.readLineSync(encoding: utf8)!;
     }
     stdout.write('Razão social: ');
-    corporateName = stdin.readLineSync(encoding: utf8)!;
+    registerName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('Nome Fantasia: ');
     fantasyName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('Número de Telefone: ');
@@ -38,6 +39,12 @@ class Company {
       telefone = stdin.readLineSync(encoding: utf8)!;
     }
     address = Address.addAddress();
-    partner = Partner.addPartner();
+    print('''\n
+Qual tipo de Sócio da Empresa?
+(1) PF (Pessoa Física)
+(2) PJ (Pessoa Jurídica)
+Sua escolha: ''');
+    String input = stdin.readLineSync(encoding: utf8)!;
+    _partner = Partner.addPartner(input);
   }
 }
