@@ -10,7 +10,7 @@ void main() {
   void addCompany() {
     print('''
 Cadastro de Nova Empresa
-Digite os campos necessários...
+Digite abaixo os campos necessários...
     ''');
     Company company = Company.addCompany();
     listCompanys.add(company);
@@ -47,7 +47,7 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
 
   void searchCompany(List listCompanys, String value) {
     if (listCompanys.isNotEmpty) {
-      stdout.write('Digite o $value da Empresa: ');
+      stdout.write('Digite o $value');
       String input = stdin.readLineSync(encoding: utf8)!;
       print('');
       for (var i = 0; i < listCompanys.length; i++) {
@@ -57,6 +57,7 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
           return;
         }
       }
+      
       print('Empresa não encontrada.');
       return;
     }
@@ -126,12 +127,12 @@ Digite a opção desejada: ''');
         }
       case '2':
         {
-          searchCompany(listCompanys, 'CNPJ');
+          searchCompany(listCompanys, 'CNPJ da Empresa: ');
           break;
         }
       case '3':
         {
-          searchCompany(listCompanys, 'CPF');
+          searchCompany(listCompanys, 'CPF do Sócio: ');
           break;
         }
       case '4':
