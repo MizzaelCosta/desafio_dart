@@ -45,7 +45,9 @@ CPF: ${CPFValidator.format(company.partner.registerNumber)}
 Nome Completo: ${company.partner.registerName}
 Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.district}, ${company.partner.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
 ''');
-    } else {
+      return;
+    }
+    if (CNPJValidator.isValid(company.partner.registerNumber)) {
       print('''
 Sócio:
 CNPJ: ${CNPJValidator.format(company.partner.registerNumber)}
