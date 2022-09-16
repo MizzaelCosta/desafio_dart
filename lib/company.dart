@@ -6,8 +6,8 @@ import 'dart:io';
 import 'dart:convert';
 
 class Company {
-  late final String _id = Uuid().v1();
-  late final DateTime _registerDate = DateTime.now();
+  late final String _id;
+  late final DateTime _registerDate;
   late String registerName;
   late String fantasyName;
   late String _registerNumber;
@@ -21,6 +21,8 @@ class Company {
   Partner get partner => _partner;
 
   Company.addCompany() {
+    _id = Uuid().v1();
+    _registerDate = DateTime.now();
     stdout.write('CNPJ (Apenas número): ');
     _registerNumber = cnpjValidator();
     stdout.write('Razão social: ');
@@ -38,7 +40,7 @@ class Company {
     while (!(CNPJValidator.isValid(imput))) {
       //Exemplo de CNPJ válido 17942159000128
       stdout.write('CNPJ inválido! Digite um CNPJ que seja válido: ');
-      _registerNumber = stdin.readLineSync(encoding: utf8)!;
+      imput = stdin.readLineSync(encoding: utf8)!;
     }
     return CNPJValidator.format(imput);
   }
