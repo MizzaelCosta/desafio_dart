@@ -22,53 +22,53 @@ class Company {
 
   Company.addCompany() {
     stdout.write('CNPJ (Apenas número): ');
-    _registerNumber = cnpjValidator(stdin.readLineSync(encoding: utf8)!);
+    _registerNumber = cnpjValidator();
     stdout.write('Razão social: ');
     registerName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('Nome Fantasia: ');
     fantasyName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('Número de Telefone: ');
-    telefone = telefoneValidator(stdin.readLineSync(encoding: utf8)!);
-    address = Address.addAddress();    
+    telefone = telefoneValidator();
+    address = Address.addAddress();
     _partner = Partner.addPartner(typePartner());
   }
 
-  String cnpjValidator(String cnpj) {
-    while (!(CNPJValidator.isValid(_registerNumber))) {
+  String cnpjValidator() {
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    while (!(CNPJValidator.isValid(imput))) {
       //Exemplo de CNPJ válido 17942159000128
       stdout.write('CNPJ inválido! Digite um CNPJ que seja válido: ');
       _registerNumber = stdin.readLineSync(encoding: utf8)!;
     }
-    return cnpj;
+    return CNPJValidator.format(imput);
   }
 
-  String telefoneValidator(String telefone) {
-    while (telefone.length != 10 || telefone.length != 11) {
+  String telefoneValidator() {
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    while (!(imput.length == 10 || imput.length == 11)) {
       stdout
           .write('Telefone inválido! Digite um número com 10 ou 11 digítos: ');
-      telefone = telefoneFormat(stdin.readLineSync(encoding: utf8)!);
+      imput = stdin.readLineSync(encoding: utf8)!;
     }
-    return telefone;
-  }
-
-  String telefoneFormat(String telefone) {
-    if (telefone.length == 10) {
-      telefone =
-          '${telefone.substring(0, 2)}) ${telefone.substring(2, 6)}-${telefone.substring(6, 10)}';
-    } else {
-      telefone =
-          '${telefone.substring(0, 2)}) ${telefone.substring(2, 6)}-${telefone.substring(6, 10)}';
+    if (imput.length == 10) {
+      imput =
+          '(${imput.substring(0, 2)}) ${imput.substring(2, 6)}-${imput.substring(6, 10)}';
     }
-    return telefone;
+    if (imput.length == 11) {
+      imput =
+          '(${imput.substring(0, 2)}) ${imput.substring(2, 3)} ${imput.substring(3, 7)}-${imput.substring(7, 11)}';
+    }
+    return imput;
   }
 
   String typePartner() {
     stdout.write('''\n
 Qual tipo de Sócio da Empresa?
-(1) PF (Pessoa Física)
-(2) PJ (Pessoa Jurídica)
+Digite: 
+(1) Para Pessoa Física (CPF)
+Outro valor para Pessoa Jurídica (CNPJ)
 Sua escolha: ''');
-    String input = stdin.readLineSync(encoding: utf8)!;
-    return input;
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    return imput;
   }
 }

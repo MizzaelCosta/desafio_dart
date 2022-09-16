@@ -21,12 +21,17 @@ class PartnerPF implements Partner {
     stdout.write('Nome Completo: ');
     _registerName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('CPF (Apenas números): ');
-    _registerNumber = stdin.readLineSync(encoding: utf8)!;
-    while (!(CPFValidator.isValid(_registerNumber))) {
+    _registerNumber = cpfValidator();
+    _address = Address.addAddress();
+  }
+
+  String cpfValidator() {
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    while (!(CPFValidator.isValid(imput))) {
       //Exemplo de CPF válido 35999906032
       stdout.write('CPF inválido! Digite um CPF que seja válido: ');
-      _registerNumber = stdin.readLineSync(encoding: utf8)!;
+      imput = stdin.readLineSync(encoding: utf8)!;
     }
-    _address = Address.addAddress();
+    return CPFValidator.format(imput);
   }
 }

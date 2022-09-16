@@ -8,7 +8,7 @@ class PartnerPJ implements Partner {
   late String _registerName;
   late String fantasyName;
   late String _registerNumber;
-  
+
   @override
   late Address address;
   @override
@@ -23,12 +23,17 @@ class PartnerPJ implements Partner {
     stdout.write('Nome Fantasia: ');
     fantasyName = stdin.readLineSync(encoding: utf8)!;
     stdout.write('CNPJ (Apenas números): ');
-    _registerNumber = stdin.readLineSync(encoding: utf8)!;
-    while (!(CNPJValidator.isValid(_registerNumber))) {
+    _registerNumber = cnpjValidator();
+    address = Address.addAddress();
+  }
+
+  String cnpjValidator() {
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    while (!(CNPJValidator.isValid(imput))) {
       //Exemplo de CPF válido 35999906032
       stdout.write('CNPJ inválido! Digite um CNPJ que seja válido: ');
-      _registerNumber = stdin.readLineSync(encoding: utf8)!;
+      imput = stdin.readLineSync(encoding: utf8)!;
     }
-    address = Address.addAddress();
+    return CNPJValidator.format(imput);
   }
 }

@@ -19,10 +19,19 @@ class Address {
     stdout.write('Estado: ');
     state = stdin.readLineSync(encoding: utf8)!;
     stdout.write('CEP: ');
-    zipCode = stdin.readLineSync(encoding: utf8)!;
-    while (zipCode.length != 8) {
+    zipCode = zipCodeValidator();
+  }
+
+  String zipCodeValidator() {
+    String imput = stdin.readLineSync(encoding: utf8)!;
+    while (imput.length != 8) {
       stdout.write('CEP invalido! Digite um CEP com 8 digítos: ');
-      zipCode = stdin.readLineSync(encoding: utf8)!;
+      imput = stdin.readLineSync(encoding: utf8)!;
     }
+    return imput;
+  }
+
+  String fullAddress() {
+    return '$street, $number, $district, $state, ${zipCode.substring(0, 2)}.${zipCode.substring(2, 5)}-${zipCode.substring(5, 8)}';
   }
 }

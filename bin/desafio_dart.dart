@@ -21,7 +21,7 @@ Digite abaixo os campos necessários...
 Sem Empresas para mostar.
 Deseja adicionar uma Empresa?
 (1) Sim
-(2) Não
+Outro valor para Não
 Sua escolha: ''');
     String input = stdin.readLineSync(encoding: utf8)!;
     print('');
@@ -33,27 +33,27 @@ Sua escolha: ''');
   void showCompany(Company company) {
     print('''
 ID: ${company.id}
-CNPJ: ${CNPJValidator.format(company.registerNumber)} Data de Cadastro: ${company.registerDate}
+CNPJ: ${company.registerNumber} Data de Cadastro: ${company.registerDate}
 Razão Social: ${company.registerName}
 Nome Fantasia: ${company.fantasyName}
-Telefone: (${company.telefone.substring(0, 2)}) ${company.telefone.substring(2, 6)}-${company.telefone.substring(6, 10)}
-Endereço: ${company.address.street}, ${company.address.number}, ${company.address.district}, ${company.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}''');
+Telefone: ${company.telefone}
+Endereço: ${company.address.fullAddress()}''');
     if (CPFValidator.isValid(company.partner.registerNumber)) {
       print('''
 Sócio:
-CPF: ${CPFValidator.format(company.partner.registerNumber)}
+CPF: ${company.partner.registerNumber}
 Nome Completo: ${company.partner.registerName}
-Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.district}, ${company.partner.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
+Endereço: ${company.partner.address.fullAddress()}
 ''');
       return;
     }
     if (CNPJValidator.isValid(company.partner.registerNumber)) {
       print('''
 Sócio:
-CNPJ: ${CNPJValidator.format(company.partner.registerNumber)}
+CNPJ: ${company.partner.registerNumber}
 Razão Social: ${company.registerName}
 Nome Fantasia: ${company.partner.registerName}
-Endereço: ${company.partner.address.street}, ${company.partner.address.number}, ${company.partner.address.district}, ${company.partner.address.state}, ${company.address.zipCode.substring(0, 2)}.${company.address.zipCode.substring(2, 5)}-${company.address.zipCode.substring(5, 8)}
+Endereço: ${company.partner.address.fullAddress()}
 ''');
     }
   }
@@ -61,18 +61,22 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
   void searchCompany(List listCompanys, String value) {
     if (listCompanys.isNotEmpty) {
       stdout.write('Digite o $value');
-      String input = stdin.readLineSync(encoding: utf8)!;
+      String imput = stdin.readLineSync(encoding: utf8)!;
       print('');
+      imput = CNPJValidator.format(imput);
       if (value == 'CNPJ da Empresa: ') {
         for (var i = 0; i < listCompanys.length; i++) {
-          if (listCompanys[i].registerNumber == input) {
+          if (listCompanys[i].registerNumber == imput) {
             showCompany(listCompanys[i]);
             return;
           }
         }
       } else if (value == 'CPF ou CNPJ do Sócio: ') {
+        String cpf = CPFValidator.format(imput);
+        String cnpj = CNPJValidator.format(imput);
         for (var i = 0; i < listCompanys.length; i++) {
-          if (listCompanys[i].partner.registerNumber == input) {
+          if (listCompanys[i].partner.registerNumber == cnpj ||
+              listCompanys[i].partner.registerNumber == cpf) {
             showCompany(listCompanys[i]);
             return;
           }
