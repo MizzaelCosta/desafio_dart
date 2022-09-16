@@ -74,12 +74,17 @@ Endereço: ${company.partner.address.fullAddress()}
       } else if (value == 'CPF ou CNPJ do Sócio: ') {
         String cpf = CPFValidator.format(imput);
         String cnpj = CNPJValidator.format(imput);
+        int counter = 0;
         for (var i = 0; i < listCompanys.length; i++) {
           if (listCompanys[i].partner.registerNumber == cnpj ||
               listCompanys[i].partner.registerNumber == cpf) {
             showCompany(listCompanys[i]);
-            return;
+            counter++;
           }
+        }
+        if (counter > 0) {
+          print('Foram encontradas $counter Empresas.');
+          return;
         }
       }
       print('Empresa não encontrada.');
