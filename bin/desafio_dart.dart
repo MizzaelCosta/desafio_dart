@@ -63,14 +63,21 @@ Endereço: ${company.partner.address.street}, ${company.partner.address.number},
       stdout.write('Digite o $value');
       String input = stdin.readLineSync(encoding: utf8)!;
       print('');
-      for (var i = 0; i < listCompanys.length; i++) {
-        if (listCompanys[i].registerNumber == input ||
-            listCompanys[i].partner.registerNumber == input) {
-          showCompany(listCompanys[i]);
-          return;
+      if (value == 'CNPJ da Empresa: ') {
+        for (var i = 0; i < listCompanys.length; i++) {
+          if (listCompanys[i].registerNumber == input) {
+            showCompany(listCompanys[i]);
+            return;
+          }
+        }
+      } else if (value == 'CPF ou CNPJ do Sócio: ') {
+        for (var i = 0; i < listCompanys.length; i++) {
+          if (listCompanys[i].partner.registerNumber == input) {
+            showCompany(listCompanys[i]);
+            return;
+          }
         }
       }
-
       print('Empresa não encontrada.');
       return;
     }
