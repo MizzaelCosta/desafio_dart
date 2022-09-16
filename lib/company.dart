@@ -16,7 +16,7 @@ class Company {
   late Partner _partner;
 
   DateTime get registerDate => _registerDate;
-  dynamic get id => _id;
+  String get id => _id;
   String get registerNumber => _registerNumber;
   Partner get partner => _partner;
 
