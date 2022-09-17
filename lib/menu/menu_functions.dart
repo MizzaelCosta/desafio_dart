@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
-import 'package:desafio_dart/company.dart';
+import 'package:desafio_dart/company/company.dart';
 
 final listCompanys = <Company>[];
 

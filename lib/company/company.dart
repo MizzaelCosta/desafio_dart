@@ -1,6 +1,6 @@
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
-import 'package:desafio_dart/address.dart';
-import 'package:desafio_dart/partner.dart';
+import 'package:desafio_dart/address/address.dart';
+import 'package:desafio_dart/partner/partner.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:io';
 import 'dart:convert';

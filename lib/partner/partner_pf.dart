@@ -1,8 +1,8 @@
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
-import 'package:desafio_dart/address.dart';
+import 'package:desafio_dart/address/address.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:desafio_dart/partner.dart';
+import 'package:desafio_dart/partner/partner.dart';
 
 class PartnerPF implements Partner {
   late String _registerName;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:desafio_dart/menu_functions.dart';
+import 'package:desafio_dart/menu/menu_functions.dart';
 
 void userMenu() {
   bool exitMenu = false;

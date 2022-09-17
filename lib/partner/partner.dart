@@ -1,8 +1,8 @@
 // ignore_for_file: recursive_getters
 
-import 'package:desafio_dart/partner_pf.dart';
-import 'package:desafio_dart/address.dart';
-import 'package:desafio_dart/partner_pj.dart';
+import 'package:desafio_dart/partner/partner_pf.dart';
+import 'package:desafio_dart/address/address.dart';
+import 'package:desafio_dart/partner/partner_pj.dart';
 
 abstract class Partner {
   factory Partner.addPartner(String value) {
