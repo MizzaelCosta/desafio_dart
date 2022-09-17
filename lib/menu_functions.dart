@@ -94,7 +94,8 @@ void searchCompany(List listCompanys, String value) {
 
 void showListCompanys(List listCompanys) {
   if (listCompanys.isNotEmpty) {
-    listCompanys.sort((a, b) => a.registerName.compareTo(b.registerName));
+    listCompanys.sort((a, b) =>
+        a.registerName.toUpperCase().compareTo(b.registerName.toUpperCase()));
     for (var i = 0; i < listCompanys.length; i++) {
       showCompany(listCompanys[i]);
     }
